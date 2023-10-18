@@ -8,5 +8,9 @@ const express = require('express'),
 app.use(express.json({limit:'100gb'}))
 app.use(express.urlencoded({extended:true, limit:'100gb'}))
 
+app.post('/uploadEpisode', multer(multerConf).single('file'), (req, res)=>{
+
+})
+
 
 app.listen('3000')
