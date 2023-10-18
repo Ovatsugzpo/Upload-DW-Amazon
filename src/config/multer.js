@@ -12,8 +12,22 @@ module.exports = {
         key: (req, file, cb)=>{
             crypto.randomBytes(4, (err, hash)=>{
                 if (err){cb(err)}
-                
+                    let name = file.originalname.slice(0, 6),
+                        ext = file.originalname.split('.').at(-1)
+
+                    cb(null, `${name}#${hash.toString('hex')}.${ext}` )
+
             })
         }
-    })
+    }),
+    filename: (req, file, cb)=>{
+        crypto.randomBytes(4, (err, hash)=>{
+            if (err) { cb(err) }
+            let name = file.originalname
+            
+            file.key
+            cb(null, file.key)
+        })
+    },
+
 }
