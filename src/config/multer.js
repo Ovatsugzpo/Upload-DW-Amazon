@@ -31,7 +31,7 @@ module.exports = {
         })
     },
     limits:{
-        FileSize: 50*1024*1024*1024
+        FileSize: 100*1024*1024*1024
     },
     fileFilter: (req, file, cb)=>{ 
         const allowedMimes = ['video/mp4', 'video/MP4',]

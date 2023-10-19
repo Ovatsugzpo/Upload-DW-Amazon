@@ -7,5 +7,5 @@ module.exports = new mongo.Schema({
     Season: {type: Number, default: null},
     Key: {type: String, default: ''},
     Url: {type: String, default: ''},
-    SpecialEpisode: {type:Boolean, default:false}
+    SpecialEpisode: {type:Number, default:1}
 })

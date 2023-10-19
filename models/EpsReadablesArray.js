@@ -20,7 +20,7 @@ module.exports = new class {
                             E = Episode.slice(Episode.length - 6, Episode.length - 4)
                         E = !isNaN(E) ? parseInt(E) : E 
                         
-                        let Special = E == 'ES' ? true : false
+                        let Special = E == 'ES' ? 0 : 1
 
                         EpisodesStreamed.push({
                             StreamReadable: StreamEp,
