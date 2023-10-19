@@ -23,11 +23,22 @@ module.exports = {
     filename: (req, file, cb)=>{
         crypto.randomBytes(4, (err, hash)=>{
             if (err) { cb(err) }
-            let name = file.originalname
-            
-            file.key
+            let name = file.originalname.slice(0, 6),
+                ext = file.originalname.split('.').at(-1)
+
+            file.key = `${name}#${hash.toString('hex')}.${ext}`
             cb(null, file.key)
         })
     },
-
+    limits:{
+        FileSize: 50*1024*1024*1024
+    },
+    fileFilter: (req, file, cb)=>{ 
+        const allowedMimes = ['video/mp4', 'video/MP4',]
+        if (allowedMimes.includes(file.mimetype)){
+            cb(null, true)
+        }else{
+            cb(new Error('Tipo de arquivo invalido'))
+        }
+    }
 }

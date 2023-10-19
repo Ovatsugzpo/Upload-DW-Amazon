@@ -16,15 +16,18 @@ module.exports = new class {
                     const Episodes = await S_E_Arrays.GetEpisodes(S)
                     Episodes.map((Episode, indexEp)=>{
     
-                        let StreamEp = fsNP.createReadStream(`${pathSeasons}/${Season}/${Episode}`)
-                        let E = Episode.slice(Episode.length - 6, Episode.length - 4)
+                        let StreamEp = fsNP.createReadStream(`${pathSeasons}/${Season}/${Episode}`),
+                            E = Episode.slice(Episode.length - 6, Episode.length - 4)
                         E = !isNaN(E) ? parseInt(E) : E 
+                        
+                        let Special = E == 'ES' ? true : false
 
                         EpisodesStreamed.push({
                             StreamReadable: StreamEp,
                             Season: S + 1,
                             Episode: E,
-                            Name: NamesEpisodes[S][indexEp]
+                            Name: NamesEpisodes[S][indexEp],
+                            SpecialEpisode: Special
                         })
                     })
     
