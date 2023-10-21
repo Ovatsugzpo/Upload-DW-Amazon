@@ -16,8 +16,10 @@ app.post('/uploadEpisode', multer(multerConf).single('file'), (req, res)=>{
     let {Season, Episode, Name:EpisodeName, SpecialEpisode} = req.body,
         {location: Url, key:Key} = req.file
 
-    Episode = Episode == 'ES' ? undefined : Episode
+    Episode = Episode == 'ES' ? 0 : Episode
     Url = process.env.AWS_FRONT + Url.split('/').at(-1)
+
+    console.log(Episode, 'Ep')
 
     DW_Model.NewEpisode(EpisodeName, Episode, Season, Key, Url, SpecialEpisode).then(episode=>{
         res.status(200).send({episode})
@@ -28,5 +30,5 @@ app.post('/uploadEpisode', multer(multerConf).single('file'), (req, res)=>{
 })
 
 app.listen('3000',(x)=>{
-    StartUpload.StartUpload().then(data=>{console.log(data)}).catch(err=>{throw err})
+    StartUpload.StartUpload().then(data=>{console.log({data: 'Foi tudo'})}).catch(err=>{throw err})
 })
